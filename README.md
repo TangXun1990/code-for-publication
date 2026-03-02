@@ -9,6 +9,7 @@ MPE_relative = 0.05;            % 最大允许误差 (±5%)
 n_measurements = 3;             % 校准时的测量次数  
 n_simulations = 1e6;         % 模拟次数  
 convergence_step = 100;        % 收敛分析步长（每1000次）  
+      
 NO2 linear accelerator  
 基于matlab 2024b模拟直线加速器水中吸收剂量不确定度的代码   
 N_sim        = 1e8;  
