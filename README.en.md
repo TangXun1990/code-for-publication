@@ -1,0 +1,26 @@
+# Code for Publication
+
+[简体中文](README.md) | **English**
+
+This repository collects simulation code for research and metrology projects. Each project has its own folder. Select a project name to open its folder, or select a source file to view it directly.
+
+## Project folders
+
+| Project and folder | Description | Main source files |
+| --- | --- | --- |
+| [NO1 High Frequency Electrosurgical Units](https://github.com/TangXun1990/code-for-publication/tree/main/NO1%20High%20Frequency%20Electrosurgical%20Units) | MATLAB R2018b simulation of uncertainty in the indicated output-power error of high-frequency electrosurgical units. | [HighFrequencyElectrosurgicalUnits202601.m](https://github.com/TangXun1990/code-for-publication/blob/main/NO1%20High%20Frequency%20Electrosurgical%20Units/HighFrequencyElectrosurgicalUnits202601.m) |
+| [NO2 Linear Accelerator](https://github.com/TangXun1990/code-for-publication/tree/main/NO2%20Linear%20Accelerator) | MATLAB R2024b simulation of uncertainty in absorbed dose to water from a linear accelerator. | [GUM method](https://github.com/TangXun1990/code-for-publication/blob/main/NO2%20Linear%20Accelerator/NO2linearacceleratorGUM.m) · [MCM method](https://github.com/TangXun1990/code-for-publication/blob/main/NO2%20Linear%20Accelerator/NO2linearacceleratorMCM.m) |
+| [NO3 Ventilator Tidal Volume](https://github.com/TangXun1990/code-for-publication/tree/main/NO3%20Ventilator%20Tidal%20Volume) | Python 3.12.9 simulation of uncertainty in the relative indication error of ventilator tidal volume. | [Correlation analysis](https://github.com/TangXun1990/code-for-publication/blob/main/NO3%20Ventilator%20Tidal%20Volume/Correlation.py) · [MCM method](https://github.com/TangXun1990/code-for-publication/blob/main/NO3%20Ventilator%20Tidal%20Volume/MCM.py) |
+
+## Ventilator project dependencies
+
+- NumPy 2.4.2
+- SciPy 1.17.1
+- Matplotlib 3.10.8
+- Numba 0.64.0
+
+These versions are listed in the original repository README. Before running the code, confirm that the packages are available in your local Python environment.
+
+---
+
+Source files are organized in their respective project folders. Open a project folder to browse or download its files.
