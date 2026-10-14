@@ -10,40 +10,27 @@
 
 使用 MATLAB R2018b 模拟高频电刀输出功率示值误差的不确定度。
 
-主要源码：[MCM](https://github.com/TangXun1990/code-for-publication/blob/main/NO1%20High%20Frequency%20Electrosurgical%20Units/HighFrequencyElectrosurgicalUnits202601.m)
+主要源码：[MCM](https://github.com/TangXun1990/code-for-publication/blob/main/NO1%20High%20Frequency%20Electrosurgical%20Units/HighFrequencyElectrosurgicalUnits202601.m) · [目录内依赖说明](NO1%20High%20Frequency%20Electrosurgical%20Units/README.md)
 
 ### [NO2 直线加速器](https://github.com/TangXun1990/code-for-publication/tree/main/NO2%20Linear%20Accelerator)
 
 使用 MATLAB R2024b 模拟直线加速器水中吸收剂量的不确定度。
 
-主要源码：[GUM 方法](https://github.com/TangXun1990/code-for-publication/blob/main/NO2%20Linear%20Accelerator/NO2linearacceleratorGUM.m) · [MCM 方法](https://github.com/TangXun1990/code-for-publication/blob/main/NO2%20Linear%20Accelerator/NO2linearacceleratorMCM.m)
+主要源码：[GUM 方法](https://github.com/TangXun1990/code-for-publication/blob/main/NO2%20Linear%20Accelerator/NO2linearacceleratorGUM.m) · [MCM 方法](https://github.com/TangXun1990/code-for-publication/blob/main/NO2%20Linear%20Accelerator/NO2linearacceleratorMCM.m) · [目录内依赖说明](NO2%20Linear%20Accelerator/README.md)
 
 ### [NO3 呼吸机潮气量](https://github.com/TangXun1990/code-for-publication/tree/main/NO3%20Ventilator%20Tidal%20Volume)
 
 使用 Python 3.12.9 模拟呼吸机潮气量相对示值误差的不确定度。
 
-主要源码：[相关性分析](https://github.com/TangXun1990/code-for-publication/blob/main/NO3%20Ventilator%20Tidal%20Volume/Correlation.py) · [MCM 方法](https://github.com/TangXun1990/code-for-publication/blob/main/NO3%20Ventilator%20Tidal%20Volume/MCM.py)
+主要源码：[相关性分析](https://github.com/TangXun1990/code-for-publication/blob/main/NO3%20Ventilator%20Tidal%20Volume/Correlation.py) · [MCM 方法](https://github.com/TangXun1990/code-for-publication/blob/main/NO3%20Ventilator%20Tidal%20Volume/MCM.py) · [目录内依赖说明](NO3%20Ventilator%20Tidal%20Volume/README.md)
 
-## 项目依赖
+## 项目依赖说明
 
-### NO1 高频电刀
+各项目的运行环境、工具箱和 Python 包依赖已分别写在对应目录的 README 中：
 
-- MATLAB R2018b。
-- Statistics and Machine Learning Toolbox：源码调用 `normpdf` 和 `prctile` 计算正态概率密度与分位数。
-
-### NO2 直线加速器
-
-- MATLAB R2024b。
-- GUM 脚本使用 MATLAB 内置数值、表格和 CSV 函数，无额外工具箱依赖。
-- MCM 脚本需要 Statistics and Machine Learning Toolbox（`normrnd`、`unifrnd`、`normpdf`）和 Parallel Computing Toolbox（`gcp`、`parpool`、`parfor`）。
-
-### NO3 呼吸机潮气量
-
-- Python 3.12.9。
-- `Correlation.py`：NumPy、Matplotlib、pandas、tqdm。
-- `MCM.py`：NumPy、Matplotlib、SciPy（`scipy.stats.norm`）、Numba。
-- 仓库记录的版本：NumPy 2.4.2、SciPy 1.17.1、Matplotlib 3.10.8、Numba 0.64.0。pandas 和 tqdm 的版本未在仓库中注明。
-- 图中中文显示还取决于系统是否安装脚本配置的中文字体；字体不属于 Python 包依赖。
+- [NO1 高频电刀依赖](NO1%20High%20Frequency%20Electrosurgical%20Units/README.md)
+- [NO2 直线加速器依赖](NO2%20Linear%20Accelerator/README.md)
+- [NO3 呼吸机潮气量依赖](NO3%20Ventilator%20Tidal%20Volume/README.md)
 
 ---
 
