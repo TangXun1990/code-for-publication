@@ -10,7 +10,7 @@ This repository collects simulation code for research and metrology projects. Ea
 
 MATLAB R2018b simulation of uncertainty in the indicated output-power error of high-frequency electrosurgical units.
 
-Main source: [HighFrequencyElectrosurgicalUnits202601.m](https://github.com/TangXun1990/code-for-publication/blob/main/NO1%20High%20Frequency%20Electrosurgical%20Units/HighFrequencyElectrosurgicalUnits202601.m)
+Main source: [MCM](https://github.com/TangXun1990/code-for-publication/blob/main/NO1%20High%20Frequency%20Electrosurgical%20Units/HighFrequencyElectrosurgicalUnits202601.m)
 
 ### [NO2 Linear Accelerator](https://github.com/TangXun1990/code-for-publication/tree/main/NO2%20Linear%20Accelerator)
 

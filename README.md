@@ -10,7 +10,7 @@
 
 使用 MATLAB R2018b 模拟高频电刀输出功率示值误差的不确定度。
 
-主要源码：[HighFrequencyElectrosurgicalUnits202601.m](https://github.com/TangXun1990/code-for-publication/blob/main/NO1%20High%20Frequency%20Electrosurgical%20Units/HighFrequencyElectrosurgicalUnits202601.m)
+主要源码：[MCM](https://github.com/TangXun1990/code-for-publication/blob/main/NO1%20High%20Frequency%20Electrosurgical%20Units/HighFrequencyElectrosurgicalUnits202601.m)
 
 ### [NO2 直线加速器](https://github.com/TangXun1990/code-for-publication/tree/main/NO2%20Linear%20Accelerator)
 
