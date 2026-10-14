@@ -24,14 +24,26 @@
 
 主要源码：[相关性分析](https://github.com/TangXun1990/code-for-publication/blob/main/NO3%20Ventilator%20Tidal%20Volume/Correlation.py) · [MCM 方法](https://github.com/TangXun1990/code-for-publication/blob/main/NO3%20Ventilator%20Tidal%20Volume/MCM.py)
 
-## 呼吸机项目依赖
+## 项目依赖
 
-- NumPy 2.4.2
-- SciPy 1.17.1
-- Matplotlib 3.10.8
-- Numba 0.64.0
+### NO1 高频电刀
 
-以上版本按仓库原 README 记录；运行前请根据本机 Python 环境确认相关库可用。
+- MATLAB R2018b。
+- Statistics and Machine Learning Toolbox：源码调用 `normpdf` 和 `prctile` 计算正态概率密度与分位数。
+
+### NO2 直线加速器
+
+- MATLAB R2024b。
+- GUM 脚本使用 MATLAB 内置数值、表格和 CSV 函数，无额外工具箱依赖。
+- MCM 脚本需要 Statistics and Machine Learning Toolbox（`normrnd`、`unifrnd`、`normpdf`）和 Parallel Computing Toolbox（`gcp`、`parpool`、`parfor`）。
+
+### NO3 呼吸机潮气量
+
+- Python 3.12.9。
+- `Correlation.py`：NumPy、Matplotlib、pandas、tqdm。
+- `MCM.py`：NumPy、Matplotlib、SciPy（`scipy.stats.norm`）、Numba。
+- 仓库记录的版本：NumPy 2.4.2、SciPy 1.17.1、Matplotlib 3.10.8、Numba 0.64.0。pandas 和 tqdm 的版本未在仓库中注明。
+- 图中中文显示还取决于系统是否安装脚本配置的中文字体；字体不属于 Python 包依赖。
 
 ---
 

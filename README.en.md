@@ -24,14 +24,26 @@ Python 3.12.9 simulation of uncertainty in the relative indication error of vent
 
 Main sources: [Correlation analysis](https://github.com/TangXun1990/code-for-publication/blob/main/NO3%20Ventilator%20Tidal%20Volume/Correlation.py) · [MCM method](https://github.com/TangXun1990/code-for-publication/blob/main/NO3%20Ventilator%20Tidal%20Volume/MCM.py)
 
-## Ventilator project dependencies
+## Project dependencies
 
-- NumPy 2.4.2
-- SciPy 1.17.1
-- Matplotlib 3.10.8
-- Numba 0.64.0
+### NO1 High Frequency Electrosurgical Units
 
-These versions are listed in the original repository README. Before running the code, confirm that the packages are available in your local Python environment.
+- MATLAB R2018b.
+- Statistics and Machine Learning Toolbox: the source calls `normpdf` and `prctile` to calculate the normal probability density and percentiles.
+
+### NO2 Linear Accelerator
+
+- MATLAB R2024b.
+- The GUM script uses built-in MATLAB numerical, table and CSV functions; no additional toolbox dependency was identified.
+- The MCM script requires Statistics and Machine Learning Toolbox (`normrnd`, `unifrnd`, `normpdf`) and Parallel Computing Toolbox (`gcp`, `parpool`, `parfor`).
+
+### NO3 Ventilator Tidal Volume
+
+- Python 3.12.9.
+- `Correlation.py`: NumPy, Matplotlib, pandas and tqdm.
+- `MCM.py`: NumPy, Matplotlib, SciPy (`scipy.stats.norm`) and Numba.
+- Versions recorded in the repository: NumPy 2.4.2, SciPy 1.17.1, Matplotlib 3.10.8 and Numba 0.64.0. Versions for pandas and tqdm are not specified in the repository.
+- Chinese text in plots also depends on Chinese fonts configured by the scripts being installed on the system; fonts are not Python package dependencies.
 
 ---
 
