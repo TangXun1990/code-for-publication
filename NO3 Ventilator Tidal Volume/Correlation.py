@@ -55,17 +55,23 @@ delta_all = []          # 存储每个r对应的δ数组
 
 print(f"开始遍历相关系数（共{len(r_values)}个点）...")
 for r in tqdm(r_values, desc="模拟进度", unit="个", ncols=80):
-    # 生成严格相关的随机误差（双精度，避免正定矩阵报错）
-    a = np.random.normal(0, 1, n_sim).astype(np.float64)  # 双精度随机数
-    b = r * a + np.sqrt(np.float64(1 - r**2 + 1e-12)) * np.random.normal(0, 1, n_sim).astype(np.float64)
+    # NumPy默认已生成float64；按原相关误差模型计算，并复用数组减少大数组临时副本。
+    a = np.random.normal(0, 1, n_sim)
+    b = np.random.normal(0, 1, n_sim)
+    b *= np.sqrt(np.float64(1 - r**2 + 1e-12))
+    b += r * a
     
-    # 生成V0和Vm的最终值（双精度）
-    V0 = V0_true + u_V0 * a
-    Vm = Vm_true + u_Vm * b
-    
-    # 计算相对示值误差δ（防止除零，双精度）
-    Vm = np.clip(Vm, np.float64(1e-6), None)
-    delta = (V0 / Vm - np.float64(1)) * np.float64(100)
+    # 原位构造V0、Vm并计算相对示值误差δ，沿用原误差模型和限值。
+    a *= u_V0
+    a += V0_true
+    b *= u_Vm
+    b += Vm_true
+    np.maximum(b, np.float64(1e-6), out=b)
+    a /= b
+    a -= np.float64(1)
+    a *= np.float64(100)
+    delta = a
+    del b
     
     # 统计标准不确定度并存储（无偏标准差，双精度）
     std_uncertainty = np.std(delta, ddof=1, dtype=np.float64)

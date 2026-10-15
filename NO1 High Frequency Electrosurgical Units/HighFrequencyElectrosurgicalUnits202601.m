@@ -12,47 +12,48 @@ convergence_step = 100;        % 收敛分析步长（每1000次）
 %% ====================== 2. 蒙特卡洛核心模拟  ======================
 
 E_actual = P_set - P_avg_measured;
-P_avg_simulated = zeros(n_simulations, 1);
-individual_measurements = zeros(n_simulations, n_measurements);
-
-for i = 1:n_simulations
-    P_three_measurements = zeros(1, n_measurements);
-    MPE_error = 0;
-    for j = 1:n_measurements
-        repeatability_error = s * randn();
-        resolution_error = resolution * (rand() - 0.5);
-        if j == 1
-            MPE_absolute = P_avg_measured * MPE_relative;
-            MPE_error = 2 * MPE_absolute * (rand() - 0.5);
-        end
-        P_single = P_avg_measured + repeatability_error + resolution_error + MPE_error;
-        P_three_measurements(j) = P_single;
-    end
-    P_avg_simulated(i) = mean(P_three_measurements);
-    individual_measurements(i, :) = P_three_measurements;
-end
+% 按样本批量生成随机误差；MPE误差在同一组测量内共享，保持原统计模型。
+MPE_absolute = P_avg_measured * MPE_relative;
+repeatability_error = s * randn(n_simulations, n_measurements);
+resolution_error = resolution * (rand(n_simulations, n_measurements) - 0.5);
+MPE_error = 2 * MPE_absolute * (rand(n_simulations, 1) - 0.5);
+individual_measurements = P_avg_measured + repeatability_error + resolution_error + MPE_error;
+P_avg_simulated = mean(individual_measurements, 2);
 E_simulated = P_set - P_avg_simulated;
 
 convergence_points = floor(n_simulations / convergence_step);
 convergence_points = max(convergence_points, 1);
 uncertainty_convergence = zeros(convergence_points, 1);
 mean_convergence = zeros(convergence_points, 1);
-simulation_counts = zeros(convergence_points, 1);
+simulation_counts = min((1:convergence_points)' * convergence_step, n_simulations);
 relative_error = zeros(convergence_points, 1);
 
+% 用中心化累计和一次计算所有前缀统计量，避免逐点重复扫描历史样本。
+sample_center = mean(E_simulated);
+centered_E = E_simulated - sample_center;
+cumulative_centered = cumsum(centered_E);
+cumulative_centered_squared = cumsum(centered_E .^ 2);
+sample_count = double(simulation_counts);
+checkpoint_sums = cumulative_centered(simulation_counts);
+checkpoint_sum_squares = cumulative_centered_squared(simulation_counts);
+mean_convergence = sample_center + checkpoint_sums ./ sample_count;
+prefix_variance = zeros(convergence_points, 1);
+valid_variance = sample_count > 1;
+prefix_variance(valid_variance) = ...
+    (checkpoint_sum_squares(valid_variance) - ...
+    checkpoint_sums(valid_variance) .^ 2 ./ sample_count(valid_variance)) ./ ...
+    (sample_count(valid_variance) - 1);
+uncertainty_convergence = sqrt(max(prefix_variance, 0));
+
 for i = 1:convergence_points
-    n_current = min(i * convergence_step, n_simulations);
-    simulation_counts(i) = n_current;
-    current_E = E_simulated(1:n_current);
-    uncertainty_convergence(i) = std(current_E);
-    mean_convergence(i) = mean(current_E);
+    n_current = simulation_counts(i);
     if mod(i, 20) == 0
         fprintf('模拟%d次，标准不确定度：%.4f W\n',n_current,uncertainty_convergence(i));
     end
 end
 
 final_uncertainty = std(E_simulated);
-final_mean = mean(E_simulated);
+final_mean = sample_center;
 E_95_lower = prctile(E_simulated, 2.5);
 E_95_upper = prctile(E_simulated, 97.5);
 
